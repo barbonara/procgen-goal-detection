@@ -1,0 +1,29 @@
+# Requirements for procgen-tools and notebooks (some are also in setup.py)
+gym==0.21.0
+gym3==0.3.3
+torch==1.13.1
+numpy==1.24.1
+matplotlib==3.6.3
+tqdm==4.64.1
+ipywidgets==7.7.2 # vscode bug on v8
+procgen==0.10.7
+scipy==1.10.0
+networkx==3.0
+# einops # aspirational
+
+# Monte's code
+pandas>=1.5.3
+git+https://github.com/UlisseMini/circrl # temp until fixed for python 3.8
+plotly>=5.13.0
+networkx>=3.0
+
+
+# Idk, random fancy stuff
+statsmodels
+prettytable
+
+# Build procgenAISC, not needed for now
+
+# pyqt5 # procgen build gets mad if this isn't here
+# must be lauro branch. master is not supported (different parsing would be required)
+# git+https://github.com/UlisseMini/procgenAISC@lauro
