@@ -231,6 +231,8 @@ def human_readable_actions(probs: np.ndarray) -> dict:
 def load_policy(model_file: str, action_size: int, device = None) -> CategoricalPolicy:
     assert type(action_size) == int
 
+    print(model_file)
+
     checkpoint = torch.load(model_file, map_location=device)
 
     # CURSED. scale varies between models trained on the lauro vs. master branch. 
