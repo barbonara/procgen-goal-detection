@@ -247,6 +247,13 @@ class Logger(object):
                 writer.writerow(self.log.columns)
             writer.writerow(log)
 
+        with open(self.logdir + '/episode_rewards.csv', 'a') as f:
+            writer = csv.writer(f)
+            if f.tell() == 0:
+                writer.writerow(["episode_rewards"])  # write the header
+            for reward in self.episode_reward_buffer:
+                writer.writerow([reward])  # write the rewards
+
         print(self.log.loc[len(self.log)-1])
 
         if self.use_wandb:
@@ -1072,8 +1079,23 @@ agent = AGENT(venv, policy, logger, storage, device,
 
 
 #%%
-# TRAINING WOOHOOOOOO
+# Training
 
-num_timesteps = 250
+num_timesteps = 10000
 agent.train(num_timesteps)
+
+
+
+# %%
+# Load the episode rewards from the file where you saved them
+episode_rewards_file = os.path.join(logdir, 'episode_rewards.csv') # Adjust the path accordingly
+episode_rewards_df = pd.read_csv(episode_rewards_file)
+
+plt.figure(figsize=(10, 6))
+plt.plot(episode_rewards_df['episode_rewards'], label='Training rewards')
+plt.xlabel('Episodes')
+plt.ylabel('Rewards')
+plt.title('Model Performance over Episodes')
+plt.legend()
+plt.show()
 # %%
