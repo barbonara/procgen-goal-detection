@@ -254,6 +254,7 @@ class Logger(object):
             for reward in self.episode_reward_buffer:
                 writer.writerow([reward])  # write the rewards
 
+
         print(self.log.loc[len(self.log)-1])
 
         if self.use_wandb:
@@ -937,7 +938,7 @@ args = {
 n_steps = hyperparameters["n_steps"]
 n_envs = hyperparameters["n_envs"]
 
-env_name = "maze_yellowstar_redgem"
+env_name = "maze_redgem_yellowstar"
 
 
 
@@ -1070,7 +1071,7 @@ if algo == 'ppo':
 else:
     raise NotImplementedError
 
-num_checkpoints = 1  # number of checkpoints to store
+num_checkpoints = 200  # number of checkpoints to store
 
 agent = AGENT(venv, policy, logger, storage, device,
               num_checkpoints, 
@@ -1081,7 +1082,7 @@ agent = AGENT(venv, policy, logger, storage, device,
 #%%
 # Training
 
-num_timesteps = 10000
+num_timesteps = 20000000
 agent.train(num_timesteps)
 
 
@@ -1099,3 +1100,21 @@ plt.title('Model Performance over Episodes')
 plt.legend()
 plt.show()
 # %%
+# Plot rolling average of rewards:
+
+episode_rewards_file = os.path.join(logdir, 'episode_rewards.csv') # Adjust the path accordingly
+episode_rewards_df = pd.read_csv(episode_rewards_file)
+
+rolling_window = 70  # This is a common choice, but adjust based on your needs
+rolling_mean = episode_rewards_df['episode_rewards'].rolling(window=rolling_window).mean()
+
+plt.figure(figsize=(10, 6))
+plt.plot(episode_rewards_df['episode_rewards'], label='Training rewards', alpha=0.6)
+plt.plot(rolling_mean, label=f'Rolling mean (window={rolling_window})', color='red')
+plt.xlabel('Episodes')
+plt.ylabel('Rewards')
+plt.title('Model Performance over Episodes')
+plt.legend()
+plt.show()
+
+#%%
