@@ -1017,7 +1017,8 @@ visualization.visualize_venv(venv, 0)
 #%%
 # Importing training code haphazardly from here
 
-
+#%%
+# Load model weights
 
 #%%
 # Initializing model
@@ -1036,6 +1037,22 @@ if isinstance(action_space, gym.spaces.Discrete):
     policy = CategoricalPolicy(model, recurrent, action_size)
 else:
     raise NotImplementedError
+
+# Load weights from saved checkpoint
+checkpoint_path = "/home/paul/Programming/procgen_maze_mult/exploration/procgen-tools/logs/train/maze_redgem_yellowstar/2023-08-08__19-06-49/model_600064.pth"
+if os.path.exists(checkpoint_path):
+    # Load the entire checkpoint
+    checkpoint = torch.load(checkpoint_path)
+
+    # Extract the model's state_dict and load it into the model
+    model_state_dict = checkpoint['model_state_dict']
+    policy.load_state_dict(model_state_dict)
+
+    #policy.load_state_dict(torch.load(checkpoint_path))
+    print(f"Loaded model from {checkpoint_path}")
+else:
+    print(f"Checkpoint {checkpoint_path} not found. Starting training from scratch.")
+
 
 policy.to(device)
 
@@ -1071,7 +1088,7 @@ if algo == 'ppo':
 else:
     raise NotImplementedError
 
-num_checkpoints = 200  # number of checkpoints to store
+num_checkpoints = 10  # number of checkpoints to store
 
 agent = AGENT(venv, policy, logger, storage, device,
               num_checkpoints, 
@@ -1082,7 +1099,7 @@ agent = AGENT(venv, policy, logger, storage, device,
 #%%
 # Training
 
-num_timesteps = 20000000
+num_timesteps = 1000000
 agent.train(num_timesteps)
 
 
