@@ -66,13 +66,13 @@ def load_model(rand_region: int = 5, num_actions: int = 15, use_small: bool = Fa
     return policy, hook
 
 
-policy, hook = load_model(
-    rand_region=RAND_REGION, num_actions=NUM_ACTIONS, use_small=False
-)
+# policy, hook = load_model(
+#     rand_region=RAND_REGION, num_actions=NUM_ACTIONS, use_small=False
+# )
 
 # Useful general variables
 default_layer = "embedder.block2.res1.resadd_out"
-hook.run_with_input(np.zeros((1, 3, 64, 64), dtype=np.float32))
-labels = list(hook.values_by_label.keys())  # all labels in the model
-if "_out" in labels:
-    labels.remove("_out")
+# hook.run_with_input(np.zeros((1, 3, 64, 64), dtype=np.float32))
+# labels = list(hook.values_by_label.keys())  # all labels in the model
+# if "_out" in labels:
+#     labels.remove("_out")

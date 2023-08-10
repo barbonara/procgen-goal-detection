@@ -19,7 +19,10 @@ from procgen import ProcgenEnv, ProcgenGym3Env
 from procgen_tools import visualization, maze
 import matplotlib.pyplot as plt
 
+
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+print(device)
 
 
 
@@ -963,6 +966,8 @@ env_name = "maze_redgem_yellowstar"
 
 
 #%%
+
+print("test")
 venv = ProcgenEnv(num_envs=n_envs,
                   env_name=env_name,
                   num_levels=args["num_levels"],
@@ -971,6 +976,7 @@ venv = ProcgenEnv(num_envs=n_envs,
                   num_threads=args["num_threads"],
                   render_mode="rgb_array",
 )
+print("test2")
 
 venv = VecExtractDictObs(venv, "rgb")
 normalize_rew = hyperparameters["normalize_rew"]
@@ -981,6 +987,7 @@ venv = TransposeFrame(venv)
 venv = ScaledFloatFrame(venv)
 
 visualization.visualize_venv(venv, 0)
+
 
 
 
@@ -1088,7 +1095,11 @@ if algo == 'ppo':
 else:
     raise NotImplementedError
 
+<<<<<<< HEAD
+num_checkpoints = 1  # number of checkpoints to store
+=======
 num_checkpoints = 10  # number of checkpoints to store
+>>>>>>> 00ec9b8d2a7fe9e796f36503ac0f49790e5f9963
 
 agent = AGENT(venv, policy, logger, storage, device,
               num_checkpoints, 
@@ -1099,7 +1110,11 @@ agent = AGENT(venv, policy, logger, storage, device,
 #%%
 # Training
 
+<<<<<<< HEAD
+num_timesteps = 20000
+=======
 num_timesteps = 1000000
+>>>>>>> 00ec9b8d2a7fe9e796f36503ac0f49790e5f9963
 agent.train(num_timesteps)
 
 
