@@ -941,7 +941,7 @@ args = {
 n_steps = hyperparameters["n_steps"]
 n_envs = hyperparameters["n_envs"]
 
-env_name = "maze_redgem_yellowstar"
+env_name = "maze_yellowstar_redgem"
 
 
 
@@ -967,7 +967,6 @@ env_name = "maze_redgem_yellowstar"
 
 #%%
 
-print("test")
 venv = ProcgenEnv(num_envs=n_envs,
                   env_name=env_name,
                   num_levels=args["num_levels"],
@@ -976,7 +975,6 @@ venv = ProcgenEnv(num_envs=n_envs,
                   num_threads=args["num_threads"],
                   render_mode="rgb_array",
 )
-print("test2")
 
 venv = VecExtractDictObs(venv, "rgb")
 normalize_rew = hyperparameters["normalize_rew"]
@@ -1046,7 +1044,7 @@ else:
     raise NotImplementedError
 
 # Load weights from saved checkpoint
-checkpoint_path = "/home/paul/Programming/procgen_maze_mult/exploration/procgen-tools/logs/train/maze_redgem_yellowstar/2023-08-08__19-06-49/model_600064.pth"
+checkpoint_path = "/home/paul/procgen-goal-detection/exploration/logs/train/maze_yellowstar_redgem/model_19900160.pth"
 if os.path.exists(checkpoint_path):
     # Load the entire checkpoint
     checkpoint = torch.load(checkpoint_path)
@@ -1095,11 +1093,7 @@ if algo == 'ppo':
 else:
     raise NotImplementedError
 
-<<<<<<< HEAD
-num_checkpoints = 1  # number of checkpoints to store
-=======
 num_checkpoints = 10  # number of checkpoints to store
->>>>>>> 00ec9b8d2a7fe9e796f36503ac0f49790e5f9963
 
 agent = AGENT(venv, policy, logger, storage, device,
               num_checkpoints, 
@@ -1110,11 +1104,7 @@ agent = AGENT(venv, policy, logger, storage, device,
 #%%
 # Training
 
-<<<<<<< HEAD
-num_timesteps = 20000
-=======
-num_timesteps = 1000000
->>>>>>> 00ec9b8d2a7fe9e796f36503ac0f49790e5f9963
+num_timesteps = 10000000
 agent.train(num_timesteps)
 
 
