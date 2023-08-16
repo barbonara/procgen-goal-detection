@@ -61,6 +61,7 @@ add_library(env
   src/games/maze.cpp
   src/games/maze_yellowstar_redgem.cpp
   src/games/maze_redgem_yellowstar.cpp
+  src/games/maze_test.cpp
   src/games/miner.cpp
   src/games/ninja.cpp
   src/games/chaser.cpp

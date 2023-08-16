@@ -26,6 +26,7 @@ ENV_NAMES = [
     "maze",
     "maze_yellowstar_redgem",
     "maze_redgem_yellowstar",
+    "maze_test"
     "miner",
     "ninja",
     "plunder",
