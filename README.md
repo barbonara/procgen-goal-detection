@@ -4,10 +4,10 @@
 
 Note: We had trouble getting procgen to work on our local machines (Mac with M1 chip). We decided to use a Virtual Machine running Debian, Debian GNU/Linux, 11 (bullseye), amd64.
 
-1. Go to procgen-custom-maze directory
+1. Go to procgen-custom-mazes directory
 2. Create a conda environment from the .yml file: `conda env create -f environment.yml -n <custom env name>`
 3. Switch to the newly created environment
-4. Run `pip install -e .` inside the procgen-custom-maze directory
+4. Run `pip install -e .` inside the procgen-custom-mazes directory
 5. Go to procgen-tools-custom-mazes directory
 6. Run `pip install -e .` inside the procgen-tools-custom-mazes directory
 
