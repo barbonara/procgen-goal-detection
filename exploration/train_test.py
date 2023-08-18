@@ -262,6 +262,9 @@ class Logger(object):
         episode_statistics = self._get_episode_statistics()
         episode_statistics_list = list(episode_statistics.values())
         log = [self.timesteps, wall_time, self.num_episodes] + episode_statistics_list
+        time_per_timestep = wall_time / self.timesteps
+        remaining_timesteps = num_timesteps - self.timesteps
+        print("Remaining_time (h):", remaining_timesteps * time_per_timestep / 3600)
         self.log.loc[len(self.log)] = log
 
         with open(self.logdir + '/log-append.csv', 'a') as f:
@@ -1124,7 +1127,7 @@ agent = AGENT(venv, policy, logger, storage, device,
 #%%
 # Training
 
-num_timesteps = 10000000
+num_timesteps = 50_000_000
 agent.train(num_timesteps)
 
 
