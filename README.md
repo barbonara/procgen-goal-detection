@@ -11,7 +11,9 @@ Note: We had trouble getting procgen to work on our local machines (Mac with M1 
 5. Go to procgen-tools-custom-mazes directory
 6. Run `pip install -e .` inside the procgen-tools-custom-mazes directory
 
-I had to install `sudo apt-get install libgl1-mesa-dev` at some point
+I had to install `sudo apt-get install libgl1-mesa-dev` at some point.
+You also need g++ and make.
+Install with `sudo apt-get install g++ make`
 
 
 Models can be found here: https://drive.google.com/drive/folders/1Ig7bzRlieyYFcdKL_PM-guSWR8WryDOL 
