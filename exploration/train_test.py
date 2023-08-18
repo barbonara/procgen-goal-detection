@@ -26,8 +26,28 @@ print(device)
 
 
 
+hard500 = {
+        'algo': 'ppo',
+        'n_envs': 256,
+        'n_steps': 256,
+        'epoch': 3,
+        'mini_batch_per_epoch': 8,
+        'mini_batch_size': 8192,
+        'gamma': 0.999,
+        'lmbda': 0.95,
+        'learning_rate': 0.0005,
+        'grad_clip_norm': 0.5,
+        'eps_clip': 0.2,
+        'value_coef': 0.5,
+        'entropy_coef': 0.01,
+        'normalize_adv': True,
+        'normalize_rew': True,
+        'use_gae': True,
+        'architecture': 'impala',
+        'recurrent': False
+    }
 #%%
-hyperparameters = {
+debug_params = {
     'algo': 'ppo',
     'n_envs': 1,
     'n_steps': 256,
@@ -48,7 +68,7 @@ hyperparameters = {
     'recurrent': False,
 }
 
-
+hyperparameters = hard500
 
 #%%
 # Utils
