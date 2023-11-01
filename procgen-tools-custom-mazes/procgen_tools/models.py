@@ -228,21 +228,42 @@ def human_readable_actions(probs: np.ndarray) -> dict:
     return {act_name: probs[..., np.array(act_indexes)].sum(-1) for act_name, act_indexes in MAZE_ACTION_INDICES.items()}
 
 
-def load_policy(model_file: str, action_size: int, device = None) -> CategoricalPolicy:
+# def load_policy(model_file: str, action_size: int, device = None) -> CategoricalPolicy:
+#     assert type(action_size) == int
+
+#     #print(model_file)
+
+#     checkpoint = torch.load(model_file, map_location=device)
+
+#     # CURSED. scale varies between models trained on the lauro vs. master branch. 
+#     global scale
+#     scale = checkpoint['model_state_dict']['embedder.block1.conv.weight'].shape[0]//16
+
+#     model = InterpretableImpalaModel(in_channels=3)
+#     policy = CategoricalPolicy(model, action_size=action_size)
+#     policy.load_state_dict(checkpoint['model_state_dict'])
+#     return policy
+
+def load_policy(model_file, action_size: int, device = None) -> CategoricalPolicy:
     assert type(action_size) == int
 
-    #print(model_file)
+    if model_file:
+        checkpoint = torch.load(model_file, map_location=device)
 
-    checkpoint = torch.load(model_file, map_location=device)
+        # CURSED. scale varies between models trained on the lauro vs. master branch. 
+        global scale
+        scale = checkpoint['model_state_dict']['embedder.block1.conv.weight'].shape[0]//16
 
-    # CURSED. scale varies between models trained on the lauro vs. master branch. 
-    global scale
-    scale = checkpoint['model_state_dict']['embedder.block1.conv.weight'].shape[0]//16
+        model = InterpretableImpalaModel(in_channels=3)
+        policy = CategoricalPolicy(model, action_size=action_size)
+        policy.load_state_dict(checkpoint['model_state_dict'])
+        return policy
+    else:
+        model = InterpretableImpalaModel(in_channels=3)
+        policy = CategoricalPolicy(model, action_size=action_size)
+        return policy
 
-    model = InterpretableImpalaModel(in_channels=3)
-    policy = CategoricalPolicy(model, action_size=action_size)
-    policy.load_state_dict(checkpoint['model_state_dict'])
-    return policy
+
 
 
 def num_channels(hook, layer_name: str):

@@ -1508,6 +1508,7 @@ def get_random_obs(
     on_training: bool = True,
     rand_region: int = 5,
     spawn_cheese: bool = True,
+    env_name = "maze",
 ):
     """Get num_obs observations from the maze environment. If on_training is True, then the observation is from a training level where the cheese is in the top-right rand_region corner.
     """
@@ -1517,7 +1518,7 @@ def get_random_obs(
     assert rand_region > 0, "rand_region must be greater than 0."
     assert num_obs > 0, "num_obs must be greater than 0."
 
-    venvs = create_venv(num_obs, start_level=0, num_levels=0)
+    venvs = create_venv(num_obs, start_level=0, num_levels=0, env_name=env_name)
     # TODO ensure that if on_training is True, then the cheese is in the top-right rand_region corner
 
     # Randomly place the mouse in each environment

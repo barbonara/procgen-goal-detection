@@ -18,8 +18,8 @@ import matplotlib.pyplot as plt
 # img = venv.env.get_info()[0]["rgb"]
 # plt.show(img)
 
-venv = maze.create_venv(1, 0, 0, env_name='maze_yellowstar_redgem')
-visualization.visualize_venv(venv, 0, ax_size=10, render_padding=True)
+venv = maze.create_venv(1, 0, 1, env_name='maze')
+visualization.visualize_venv(venv, 0, ax_size=10, render_padding=True, mode='agent')
 
 
 

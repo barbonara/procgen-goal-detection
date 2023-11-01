@@ -1,2 +1,0 @@
-timesteps,wall_time,num_episodes,max_episode_rewards,mean_episode_rewards,min_episode_rewards,max_episode_len,mean_episode_len,min_episode_len,mean_timeouts,val_max_episode_rewards,val_mean_episode_rewards,val_min_episode_rewards,val_max_episode_len,val_mean_episode_len,val_min_episode_len,val_mean_timeouts
-65536,523.7708330154419,111,10.0,10.0,0.0,233,75.775,0,0.0,0.0,nan,0.0,0.0,nan,0.0,nan
